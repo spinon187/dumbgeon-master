@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 // import logo from './logo.svg';
 import './App.css';
-import {Route, NavLink} from 'react-router-dom';
+// import {Route, NavLink} from 'react-router-dom';
 import Main from './views/Main';
 import Login from './views/Login';
 import List from './views/List';
@@ -16,10 +16,7 @@ class App extends Component() {
   }
   render(){
     return(
-      <>
-      <Route exact path='/' component={List}/>
-      <Route path='/login' component={Login}/>
-      </>
+      <></>
     )
   }
 }

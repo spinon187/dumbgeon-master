@@ -7,18 +7,20 @@ class CharSheet extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      name: this.props.name,
-      level: this.props.level,
-      class: this.props.class,
-      hp: this.props.hp,
-      hpMax: this.props.hpMax,
-      ac: this.props.ac,
-      str: this.props.str,
-      con: this.props.con,
-      dex: this.props.dex,
-      wis: this.props.wis,
-      int: this.props.int,
-      cha: this.props.cha,
+      name: this.props.char.name,
+      level: this.props.char.level,
+      class: this.props.char.class,
+      hp: this.props.char.hp,
+      hpMax: this.props.char.hpMax,
+      ac: this.props.char.ac,
+      str: this.props.char.str,
+      con: this.props.char.con,
+      dex: this.props.char.dex,
+      wis: this.props.char.wis,
+      int: this.props.char.int,
+      cha: this.props.char.cha,
+      inventory: this.props.char.inventory,
+      notes: this.props.char.notes
     }
   }
 
@@ -41,33 +43,40 @@ class CharSheet extends React.Component {
     return val < 0 ? `-${val}` : `+${val}`
   }
 
+  displayInventory = () => {
+    this.state.inventory.map(item => <div className='invItem'>{item}</div>)
+  }
+
   render(){
     return (
       <CharSheetBox>
         <div className='charName'><p>{this.state.name}</p></div>
-        <div className='charClassLvl'>{this.formatClass}</div>
-        <div className='prof'><p><span>Proficiency Bonus:</span> {this.getProficiency}</p></div>
-        <div className='chrStat'>
+        <div className='charClassLvl'>{this.formatClass()}</div>
+        <div className='prof'><p><span>Proficiency Bonus:</span> {this.getProficiency()}</p></div>
+        <div className='charHP'><p>{this.state.hp} / {this.state.maxHp}</p></div>
+        <div className='charStat'>
           <p><span>AC:</span>{this.state.ac}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>STR:</span>{this.state.str} ({this.getStatBonus(this.state.str)}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>DEX:</span>{this.state.dex} ({this.getStatBonus(this.state.dex)}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>CON:</span>{this.state.con} ({this.getStatBonus(this.state.con)}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>INT:</span>{this.state.int} ({this.getStatBonus(this.state.int)}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>WIS:</span>{this.state.wis} ({this.getStatBonus(this.state.wis)}</p>
         </div>
-        <div className='chrStat'>
+        <div className='charStat'>
           <p><span>CHA:</span>{this.state.cha} ({this.getStatBonus(this.state.cha)})</p>
         </div>
+        <div className='charInv'>Inventory:<br />{this.displayInventory()}</div>
+        <div className='charNotes'>Notes:<br /><p>{this.state.notes}</p></div>
 
       </CharSheetBox>
     )
@@ -77,3 +86,4 @@ class CharSheet extends React.Component {
 const CharSheetBox = styled.div`
 
 `
+
